@@ -6,7 +6,7 @@
 #    By: ozozdemi <ozozdemi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/25 13:36:27 by ozozdemi          #+#    #+#              #
-#    Updated: 2023/04/25 14:26:25 by ozozdemi         ###   ########.fr        #
+#    Updated: 2023/05/09 13:46:39 by ozozdemi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC =		@cc
 CFLAGS =	-Wall -Wextra -Werror -g3
 OBJ =		$(patsubst src%, obj%, $(SRC:.c=.o))
 SRC =		src/push_swap.c \
-		
+		src/lst.c \
 
 all:		obj ${NAME}
 

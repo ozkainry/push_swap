@@ -6,7 +6,7 @@
 /*   By: ozozdemi <ozozdemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:09:39 by ozozdemi          #+#    #+#             */
-/*   Updated: 2023/05/09 13:21:45 by ozozdemi         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:58:08 by ozozdemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,17 @@ void	lstadd_back(t_pile **lst, t_pile *new)
 	}
 	last = lstlast(*lst);
 	last->next = new;
+}
+
+int	lstsize(t_pile *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }

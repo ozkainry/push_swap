@@ -6,17 +6,17 @@
 /*   By: ozozdemi <ozozdemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:36:35 by ozozdemi          #+#    #+#             */
-/*   Updated: 2023/05/09 13:36:23 by ozozdemi         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:38:06 by ozozdemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	ps_atoi(const char *str)
+long int	ps_atoi(const char *str)
 {
-	int	result;
-	int	sign;
-	int	i;
+	long int	result;
+	int			sign;
+	int			i;
 
 	result = 0;
 	sign = 1;
@@ -46,7 +46,7 @@ t_pile	*create_pile(t_pile *pile, char **argv)
 	i = 1;
 	pile = lstnew(ps_atoi(argv[i]));
 	i++;
-	while (argv[i] != NULL)
+	while (argv[i])
 	{
 		tmp = lstnew(ps_atoi(argv[i]));
 		lstadd_back(&pile, tmp);
@@ -55,18 +55,65 @@ t_pile	*create_pile(t_pile *pile, char **argv)
 	return (pile);
 }
 
+long int	find_zero(t_pile *pile)
+{
+	while (pile->index != 0)
+	{
+		pile = pile->next;
+	}
+	return (pile->content);
+}
+
+void	index_nb(t_pile	*pile)
+{
+	int		i;
+	int		j;
+	int		k;
+	int		size;
+	t_pile	*tmp2;
+	t_pile	*tmp;
+
+	size = lstsize(pile);
+	i = 0;
+	j = 1;
+	tmp2 = pile;
+	tmp = pile;
+	while (i < size)
+	{
+		k = find_zero(pile);
+		while (pile != NULL)
+		{
+			if (pile->index == 0 && pile->content <= k)
+			{
+				tmp2 = pile;
+				k = pile->content;
+			}
+			pile = pile->next;
+		}
+		tmp2->index = j;
+		pile = tmp;
+		j++;
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_pile	*a;
 
-	(void)	argc;
 	a = NULL;
-	
-	a = create_pile(a, argv);
-	while (a != NULL)
+	if (argc > 1)
 	{
-		printf("%d\n", a->content);
-		a = a->next;
+		if (check_all(argv))
+			a = create_pile(a, argv);
+		// swap(&a);
+		index_nb(a);
+		while (a != NULL)
+		{
+			printf("%ld        %d\n", a->content, a->index);
+			a = a->next;
+		}
 	}
+	free(a);
 	return (0);
 }

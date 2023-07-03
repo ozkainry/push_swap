@@ -6,7 +6,7 @@
 /*   By: ozozdemi <ozozdemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:09:39 by ozozdemi          #+#    #+#             */
-/*   Updated: 2023/05/10 15:58:08 by ozozdemi         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:59:54 by ozozdemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,18 @@ int	lstsize(t_pile *lst)
 		i++;
 	}
 	return (i);
+}
+
+void	lstclear(t_pile **lst)
+{
+	t_pile	*save;
+
+	if (!lst || !*lst)
+		return ;
+	while (*lst)
+	{
+		save = (*lst)->next;
+		free(*lst);
+		*lst = save;
+	}
 }

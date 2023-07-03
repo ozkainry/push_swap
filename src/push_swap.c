@@ -6,7 +6,7 @@
 /*   By: ozozdemi <ozozdemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:36:35 by ozozdemi          #+#    #+#             */
-/*   Updated: 2023/05/10 16:38:06 by ozozdemi         ###   ########.fr       */
+/*   Updated: 2023/07/03 14:02:36 by ozozdemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,82 +38,53 @@ long int	ps_atoi(const char *str)
 	return (result * sign);
 }
 
-t_pile	*create_pile(t_pile *pile, char **argv)
+t_pile	*create_pile(int argc, char **argv)
 {
-	int		i;
-	t_pile	*tmp;
+	int			arg;
+	t_pile		*pile;
+	t_pile		*tmp;
 
-	i = 1;
-	pile = lstnew(ps_atoi(argv[i]));
-	i++;
-	while (argv[i])
+	arg = argc;
+	pile = NULL;
+	pile = lstnew(ps_atoi(*(++argv)));
+	pile->index = 0;
+	if (!pile)
+		return (NULL);
+	while (--argc > 1)
 	{
-		tmp = lstnew(ps_atoi(argv[i]));
+		tmp = lstnew(ps_atoi(*(++argv)));
+		tmp->index = 0;
 		lstadd_back(&pile, tmp);
-		i++;
 	}
+	set_index(pile, arg);
 	return (pile);
-}
-
-long int	find_zero(t_pile *pile)
-{
-	while (pile->index != 0)
-	{
-		pile = pile->next;
-	}
-	return (pile->content);
-}
-
-void	index_nb(t_pile	*pile)
-{
-	int		i;
-	int		j;
-	int		k;
-	int		size;
-	t_pile	*tmp2;
-	t_pile	*tmp;
-
-	size = lstsize(pile);
-	i = 0;
-	j = 1;
-	tmp2 = pile;
-	tmp = pile;
-	while (i < size)
-	{
-		k = find_zero(pile);
-		while (pile != NULL)
-		{
-			if (pile->index == 0 && pile->content <= k)
-			{
-				tmp2 = pile;
-				k = pile->content;
-			}
-			pile = pile->next;
-		}
-		tmp2->index = j;
-		pile = tmp;
-		j++;
-		i++;
-	}
 }
 
 int	main(int argc, char **argv)
 {
 	t_pile	*a;
+	t_pile	*b;
 
 	a = NULL;
-	if (argc > 1)
+	b = NULL;
+	if (argc < 2)
+		return (1);
+	if (check_all(argv))
+		a = create_pile(argc, argv);
+	if (!a)
+		return (1);
+	if (!is_sorted(a))
 	{
-		if (check_all(argv))
-			a = create_pile(a, argv);
-		// swap(&a);
-		index_nb(a);
-		while (a != NULL)
-		{
-			printf("%ld        %d\n", a->content, a->index);
-			a = a->next;
-		}
+		if (argc < 7)
+			sort_few(&a, &b, argc);
+		else
+			radix_sort(&a, &b, argc);
+		// while (a != NULL)
+		// {
+		// 	printf("%ld\t%d\n", a->content, a->index);
+		// 	a = a->next;
+		// }
 	}
-	free(a);
-	return (0);
+	lstclear(&a);
+	lstclear(&b);
 }

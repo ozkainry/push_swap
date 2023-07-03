@@ -6,7 +6,7 @@
 #    By: ozozdemi <ozozdemi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/25 13:36:27 by ozozdemi          #+#    #+#              #
-#    Updated: 2023/05/10 12:41:34 by ozozdemi         ###   ########.fr        #
+#    Updated: 2023/07/03 13:43:35 by ozozdemi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,9 @@ SRC =		src/push_swap.c \
 		src/lst.c \
 		src/parsing.c \
 		src/instructions.c \
+		src/utils.c \
+		src/radix_sort.c \
+		src/sort_few.c \
 
 all:		obj ${NAME}
 
@@ -26,7 +29,7 @@ ${NAME}:	${OBJ}
 		@make -sC libft/
 		@echo "\033[1;32mLIBFT COMPILED\n"
 		@echo "\033[0;33mCOMPILING PUSH_SWAP"
-		${CC} -o ${NAME} ${OBJ}
+		${CC} -o ${NAME} ${OBJ} libft/libft.a
 		@echo "\033[1;32mPUSH_SWAP COMPILED\n"
 
 obj:

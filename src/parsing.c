@@ -6,7 +6,7 @@
 /*   By: ozozdemi <ozozdemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:47:13 by ozozdemi          #+#    #+#             */
-/*   Updated: 2023/05/09 18:09:36 by ozozdemi         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:41:46 by ozozdemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_double(char **argv)
 		{
 			if (ps_atoi(argv[i]) == ps_atoi(argv[j]))
 			{	
-				write(2, "Error\n", 6);
+				ft_printf("Error\n");
 				return (0);
 			}
 			j++;
@@ -50,7 +50,7 @@ int	check_nb(char **argv)
 		{
 			if (argv[i][j] < '0' || argv[i][j] > '9')
 			{
-				write(2, "Error\n", 6);
+				ft_printf("Error\n");
 				return (0);
 			}
 			j++;
@@ -69,7 +69,7 @@ int	check_int(char **argv)
 	{
 		if (ps_atoi(argv[i]) < -2147483648 || ps_atoi(argv[i]) > 2147483647)
 		{
-			write(2, "Error\n", 6);
+			ft_printf("Error\n");
 			return (0);
 		}
 		i++;

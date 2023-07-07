@@ -6,7 +6,7 @@
 /*   By: ozozdemi <ozozdemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:47:13 by ozozdemi          #+#    #+#             */
-/*   Updated: 2023/06/23 14:41:46 by ozozdemi         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:38:40 by ozozdemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ int	check_double(char **argv)
 		while (argv[j])
 		{
 			if (ps_atoi(argv[i]) == ps_atoi(argv[j]))
-			{	
-				ft_printf("Error\n");
-				return (0);
-			}
+				return (write(2, "Error\n", 6), 0);
 			j++;
 		}
 		i++;
@@ -45,14 +42,15 @@ int	check_nb(char **argv)
 	{
 		j = 0;
 		if (argv[i][0] == '-' || argv[i][0] == '+')
+		{
 			j++;
+			if (argv[i][j] == '\0')
+				return (write(2, "Error\n", 6), 0);
+		}
 		while (argv[i][j])
 		{
 			if (argv[i][j] < '0' || argv[i][j] > '9')
-			{
-				ft_printf("Error\n");
-				return (0);
-			}
+				return (write(2, "Error\n", 6), 0);
 			j++;
 		}
 		i++;
@@ -68,10 +66,7 @@ int	check_int(char **argv)
 	while (argv[i])
 	{
 		if (ps_atoi(argv[i]) < -2147483648 || ps_atoi(argv[i]) > 2147483647)
-		{
-			ft_printf("Error\n");
-			return (0);
-		}
+			return (write(2, "Error\n", 6), 0);
 		i++;
 	}
 	return (1);

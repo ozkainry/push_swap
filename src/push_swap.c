@@ -6,7 +6,7 @@
 /*   By: ozozdemi <ozozdemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:36:35 by ozozdemi          #+#    #+#             */
-/*   Updated: 2023/07/07 15:39:25 by ozozdemi         ###   ########.fr       */
+/*   Updated: 2023/07/13 14:28:11 by ozozdemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ int	main(int argc, char **argv)
 	a = NULL;
 	b = NULL;
 	if (argc < 2)
-	{
-		return (write(2, "Error\n", 6), 1);
-	}
+		return (1);
 	if (check_all(argv))
 		a = create_pile(argc, argv);
 	if (!a)
